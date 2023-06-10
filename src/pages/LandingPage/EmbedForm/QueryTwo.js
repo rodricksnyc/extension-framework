@@ -166,7 +166,7 @@ console.log(values)
 
   const filterOptions = [
   {
-  filters: "Created Date",
+  filter: "Created Date",
   label_short: "Created Week of Year"
   },
 
