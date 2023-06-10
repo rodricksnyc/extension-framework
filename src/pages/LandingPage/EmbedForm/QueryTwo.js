@@ -96,19 +96,26 @@ const QueryTwo = ({ queryId }) => {
   useEffect(() => {
   async function fetchData() {
 
-    let fields = await sdk.ok(
+    let fieldsValue = await sdk.ok(
       sdk.lookml_model_explore('rebecca_thompson_project', 'order_items', 'fields')
     )
-            const dimensions = fields["fields"]["dimensions"];
-            const measures = fields["fields"]["measures"];
+
+
+            const dimensions = fieldsValue["fields"]["dimensions"];
+            const measures = fieldsValue["fields"]["measures"];
+
+
+
+            console.log("dimensions", dimensions)
+            console.log("measures", measures)
 
 
             let dims = filterOutValues(dimensions);
             let meas = filterOutValues(measures);
-            let filters = dims.concat(meas);
+            let fields = dims.concat(meas);
 
             return {
-              filters,
+              fields,
               measures: meas,
               dimensions: dims,
             };
@@ -120,7 +127,7 @@ const QueryTwo = ({ queryId }) => {
 
 
 
-  const filterOutValues = (values) => {
+const filterOutValues = (values) => {
 console.log(values)
     let newVals = []
 
@@ -137,6 +144,13 @@ console.log(values)
     })
     return newVals
   }
+
+
+ // tags : "dimension: <name of dimension>"
+ // tags : "measures: <name of measure>"
+ // tags : "filter: <name of filter>"
+ // label_short: "Created Day of Week Index"
+//this is what the object would look like below
 
 
   const fieldOptions = [
